@@ -6,7 +6,7 @@ weight: 10
 
 <!-- overview -->
 
-쿠버네티스는 컨테이너를 파드내에 배치하고 _노드_ 에서 실행함으로 워크로드를 구동한다.
+쿠버네티스는 컨테이너를 파드 내에 배치하고 _노드_ 에서 실행함으로써 워크로드를 구동한다.
 노드는 클러스터에 따라 가상 또는 물리적 머신일 수 있다. 각 노드에는
 {{< glossary_tooltip text="컨트롤 플레인" term_id="control-plane" >}}이라는
 {{< glossary_tooltip text="파드" term_id="pod" >}}를
@@ -31,7 +31,7 @@ weight: 10
 
 노드 오브젝트 또는 노드의 kubelet으로 자체 등록한 후
 컨트롤 플레인은 새 노드 오브젝트가 유효한지 확인한다.
-예를 들어 다음 JSON 매니페스트에서 노드를 만들려는 경우이다.
+예를 들어, 다음 JSON 매니페스트에서 노드를 만드는 경우이다.
 
 ```json
 {
@@ -49,7 +49,7 @@ weight: 10
 쿠버네티스는 내부적으로 노드 오브젝트를 생성한다(표시한다). 쿠버네티스는
 kubelet이 노드의 `metadata.name` 필드와 일치하는 API 서버에 등록이 되어있는지 확인한다.
 노드가 정상이면(필요한 모든 서비스가 실행중인 경우) 파드를 실행할 수 있게 된다.
-그렇지 않으면, 해당 노드는 정상이 될때까지 모든 클러스터 활동에
+그렇지 않으면, 해당 노드는 정상이 될 때까지 모든 클러스터 활동에
 대해 무시된다.
 
 {{< note >}}
@@ -57,7 +57,7 @@ kubelet이 노드의 `metadata.name` 필드와 일치하는 API 서버에 등록
 정상적인지 확인한다.
 
 상태 확인을 중지하려면 사용자 또는 {{< glossary_tooltip term_id="controller" text="컨트롤러">}}에서
-노드 오브젝트를 명시적으로 삭제해야한다.
+노드 오브젝트를 명시적으로 삭제해야 한다.
 {{< /note >}}
 
 노드 오브젝트의 이름은 유효한
@@ -82,7 +82,7 @@ kubelet 플래그 `--register-node`는 참(기본값)일 경우, kubelet 은 API
 
 [Node authorization mode](/docs/reference/access-authn-authz/node/)와
 [NodeRestriction admission plugin](/docs/reference/access-authn-authz/admission-controllers/#noderestriction)이 활성화 되면,
-kubelets 은 자신의 노드 리소스를 생성/수정할 권한을 가진다.
+kubelet 은 자신의 노드 리소스를 생성/수정할 권한을 가진다.
 
 #### 수동 노드 관리
 
@@ -92,7 +92,7 @@ kubelets 은 자신의 노드 리소스를 생성/수정할 권한을 가진다.
 노드 오브젝트를 수동으로 생성하려면 kubelet 플래그를 `--register-node=false` 로 설정한다.
 
 `--register-node` 설정과 관계 없이 노드 오브젝트를 수정할 수 있다.
-예를 들어 기존 노드에 레이블을 설정하거나, 스케줄 불가로 표시할 수 있다.
+예를 들어, 기존 노드에 레이블을 설정하거나, 스케줄 불가로 표시할 수 있다.
 
 파드의 노드 셀렉터와 함께 노드의 레이블을 사용해서 스케줄링을 제어할 수 있다.
 예를 들어, 사용 가능한 노드의 하위 집합에서만 실행되도록
@@ -123,7 +123,7 @@ kubectl cordon $NODENAME
 * [용량과 할당가능](#capacity)
 * [정보](#info)
 
-`kubectl` 을 사용해서 노드 상태와 기타 세부 정보를 볼수 있다.
+`kubectl` 을 사용해서 노드 상태와 기타 세부 정보를 볼 수 있다.
 
 ```shell
 kubectl describe node <insert-node-name-here>
@@ -147,7 +147,7 @@ kubectl describe node <insert-node-name-here>
 {{< table caption = "노드 컨디션과 각 컨디션이 적용되는 시기에 대한 설명들이다." >}}
 | 노드 컨디션 | 설명 |
 |----------------|-------------|
-| `Ready`        | 노드가 상태 양호하며 파드를 수용할 준비가 되어 있는 경우 `True`, 노드의 상태가 불량하여 파드를 수용하지 못할 경우 `False`, 그리고 노드 컨트롤러가 마지막 `node-monitor-grace-period` (기본값 40 기간 동안 노드로부터 응답을 받지 못한 경우) `Unknown` |
+| `Ready`        | 노드의 상태가 양호하며 파드를 수용할 준비가 되어 있는 경우 `True`, 노드의 상태가 불량하여 파드를 수용하지 못할 경우 `False`, 그리고 노드 컨트롤러가 마지막 `node-monitor-grace-period` (기본값 40 기간 동안 노드로부터 응답을 받지 못한 경우) `Unknown` |
 | `DiskPressure`    | 디스크 사이즈 상에 압박이 있는 경우, 즉 디스크 용량이 넉넉치 않은 경우 `True`, 반대의 경우 `False` |
 | `MemoryPressure`    | 노드 메모리 상에 압박이 있는 경우, 즉 노드 메모리가 넉넉치 않은 경우 `True`, 반대의 경우 `False` |
 | `PIDPressure`    | 프로세스 상에 압박이 있는 경우, 즉 노드 상에 많은 프로세스들이 존재하는 경우 `True`, 반대의 경우 `False` |
@@ -208,7 +208,7 @@ apiserver로부터 삭제되어 그 이름을 사용할 수 있는 결과를 낳
 
 ### 정보
 
-커널 버전, 쿠버네티스 버전 (kubelet과 kube-proxy 버전), (사용하는 경우) Docker 버전, OS 이름과 같은노드에 대한 일반적인 정보를 보여준다.
+커널 버전, 쿠버네티스 버전 (kubelet과 kube-proxy 버전), (사용하는 경우) Docker 버전, OS 이름과 같은 노드에 대한 일반적인 정보를 보여준다.
 이 정보는 Kubelet에 의해 노드로부터 수집된다.
 
 ### 노드 컨트롤러
@@ -243,7 +243,7 @@ NodeStatus의 NodeReady 컨디션을 ConditionUnknown으로 업데이트 하는 
 각 노드에는 `kube-node-lease` 라는
 {{< glossary_tooltip term_id="namespace" text="네임스페이스">}} 에 관련된 리스 오브젝트가 있다.
 리스는 경량 리소스로, 클러스터가 확장될 때
-노드의 하트비트 성능을 향상 시킨다.
+노드의 하트비트 성능을 향상시킨다.
 
 kubelet은 `NodeStatus` 와 리스 오브젝트를 생성하고 업데이트 할
 의무가 있다.
@@ -263,7 +263,7 @@ kubelet은 `NodeStatus` 와 리스 오브젝트를 생성하고 업데이트 할
 파드 축출을 하지 않는다는 의미가 된다.
 
 노드 축출 행위는 주어진 가용성 영역 내 하나의 노드가 상태가 불량할
-경우 변화한다. 노드 컨트롤러는 영역 내 동시에 상태가 불량한 노드의 퍼센티지가 얼마나 되는지
+경우 변화한다. 노드 컨트롤러는 영역 내 동시에 상태가 불량한 노드의 비율이 얼마나 되는지
 체크한다(NodeReady 컨디션은 ConditionUnknown 또는 ConditionFalse 다.).
 상태가 불량한 노드의 일부가 최소
 `--unhealthy-zone-threshold` 기본값 0.55) 가
@@ -309,12 +309,12 @@ kubelet은 `NodeStatus` 와 리스 오브젝트를 생성하고 업데이트 할
 노드 상에 모든 노드에 대해 충분한 리소스가 존재하도록 보장한다. 스케줄러는 노드 상에
 컨테이너에 대한 요청의 합이 노드 용량보다 더 크지 않도록 체크한다.
 요청의 합은 kubelet에서 관리하는 모든 컨테이너를 포함하지만, 컨테이너 런타임에
-의해 직접적으로 시작된 컨 테이너는 제외되고 kubelet의 컨트롤 범위
+의해 직접적으로 시작된 컨테이너는 제외되고 kubelet의 컨트롤 범위
 밖에서 실행되는 모든 프로세스도 제외된다.
 
 {{< note >}}
 파드 형태가 아닌 프로세스에 대해 명시적으로 리소스를 확보하려면,
-[시스템 데몬에 사용할 리소스 예약하기](/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved)을 본다.
+[시스템 데몬에 사용할 리소스 예약하기](/docs/tasks/administer-cluster/reserve-compute-resources/#system-reserved)를 본다.
 {{< /note >}}
 
 ## 노드 토폴로지
@@ -345,7 +345,7 @@ Kubelet은 노드가 종료되는 동안 파드가 일반 [파드 종료 프로�
 * `ShutdownGracePeriodCriticalPods`:
   * 노드 종료 중에 [중요 파드](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical)를 종료하는 데 사용되는 기간을 지정한다. 이는 `ShutdownGracePeriod`보다 작아야 한다.
 
-예를 들어 `ShutdownGracePeriod=30s`, `ShutdownGracePeriodCriticalPods=10s` 인 경우 kubelet은 노드 종료를 30 초까지 지연시킨다. 종료하는 동안 처음 20(30-10) 초는 일반 파드의 유예 종료에 할당되고, 마지막 10 초는 [중요 파드](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical)의 종료에 할당된다.
+예를 들어, `ShutdownGracePeriod=30s`, `ShutdownGracePeriodCriticalPods=10s` 인 경우 kubelet은 노드 종료를 30 초까지 지연시킨다. 종료하는 동안 처음 20(30-10) 초는 일반 파드의 유예 종료에 할당되고, 마지막 10 초는 [중요 파드](/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical)의 종료에 할당된다.
 
 
 ## {{% heading "whatsnext" %}}
